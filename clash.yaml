@@ -1,0 +1,29 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+proxies:
+  - name: LiberClaw
+    type: vless
+    server: "2a01:240:ad00:2503:3:a2fe:d402:d631"
+    port: 8443
+    uuid: cdbacefd-0d61-4a18-81bf-c922292c3147
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: www.microsoft.com
+    reality-opts:
+      public-key: iivTDQUrzHovczbzElb2LzU5Z71-oMDBU7Ip2Pel6zA
+      short-id: 1de2253e95d0c44a
+    client-fingerprint: chrome
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - LiberClaw
+      - DIRECT
+rules:
+  - MATCH,PROXY
